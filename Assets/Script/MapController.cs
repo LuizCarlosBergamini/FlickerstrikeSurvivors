@@ -41,41 +41,18 @@ public class MapController : MonoBehaviour
             return;
         }
 
-        playerSide = CheckPlayerSide();
-
-        if (string.IsNullOrEmpty(playerSide))
+        if (pm.moveDir != Vector2.zero)
         {
-            return;
+            CheckAndSpawnChunk("Right");
+            CheckAndSpawnChunk("Left");
+            CheckAndSpawnChunk("Top");
+            CheckAndSpawnChunk("Down");
+            CheckAndSpawnChunk("Top-Left");
+            CheckAndSpawnChunk("Top-Right");
+            CheckAndSpawnChunk("Down-Right");
+            CheckAndSpawnChunk("Down-Left");
         }
 
-        Transform sideTransform = currentChunk.transform.Find(playerSide);
-        if (sideTransform != null && !Physics2D.OverlapCircle(sideTransform.position, checkerRadius, terrainMask))
-        {
-            Debug.Log(playerSide);
-            noTerrainPosition = sideTransform.position;
-            ChunkSpawner();
-
-            if (playerSide.Contains("Up") && playerSide.Contains("Right"))
-            {
-                CheckAndSpawnChunk("Up");
-                CheckAndSpawnChunk("Right");
-            }
-            else if (playerSide.Contains("Up") && playerSide.Contains("Left"))
-            {
-                CheckAndSpawnChunk("Up");
-                CheckAndSpawnChunk("Left");
-            }
-            else if (playerSide.Contains("Down") && playerSide.Contains("Right"))
-            {
-                CheckAndSpawnChunk("Down");
-                CheckAndSpawnChunk("Right");
-            }
-            else if (playerSide.Contains("Down") && playerSide.Contains("Left"))
-            {
-                CheckAndSpawnChunk("Down");
-                CheckAndSpawnChunk("Left");
-            }
-        }
     }
 
     private void CheckAndSpawnChunk(string direction)
@@ -85,46 +62,6 @@ public class MapController : MonoBehaviour
         {
             noTerrainPosition = directionTransform.position;
             ChunkSpawner();
-        }
-    }
-
-    private string CheckPlayerSide()
-    {
-        if (pm.moveDir.x > 0 && pm.moveDir.y == 0) //right
-        {
-            return "Right";
-        }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y == 0) //left
-        {
-            return "Left";
-        }
-        else if (pm.moveDir.x == 0 && pm.moveDir.y > 0) //top
-        {
-            return "Top";
-        }
-        else if (pm.moveDir.x == 0 && pm.moveDir.y < 0) //down
-        {
-            return "Down";
-        }
-        else if (pm.moveDir.x > 0 && pm.moveDir.y > 0) //top-right
-        {
-            return "Top-Right";
-        }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y > 0) //top-left
-        {
-            return "Top-Left";
-        }
-        else if (pm.moveDir.x > 0 && pm.moveDir.y < 0) //down-right
-        {
-            return "Down-Right";
-        }
-        else if (pm.moveDir.x < 0 && pm.moveDir.y < 0) //down-left
-        {
-            return "Down-Left";
-        }
-        else
-        {
-            return string.Empty;
         }
     }
 
