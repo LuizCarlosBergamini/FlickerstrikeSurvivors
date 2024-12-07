@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9803404976212d41901a25ddd1983f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3.5
   lastVerticalVector: 0
   lastHorizontalVector: 0
   moveDir: {x: 0, y: 0}
