@@ -86,14 +86,17 @@ public class MapController : MonoBehaviour
 
         foreach (var chunk in spawnedChunks)
         {
-            opDistance = Vector3.Distance(player.transform.position, chunk.transform.position);
-            if (opDistance > maxOpDistance)
+            if (player != null)
             {
-                chunk.SetActive(false);
-            }
-            else
-            {
-                chunk.SetActive(true);
+                opDistance = Vector3.Distance(player.transform.position, chunk.transform.position);
+                if (opDistance > maxOpDistance)
+                {
+                    chunk.SetActive(false);
+                }
+                else
+                {
+                    chunk.SetActive(true);
+                }
             }
     }
 }
